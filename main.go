@@ -1,45 +1,23 @@
 package main
 
 import (
-    "html/template"
     "net/http"
+    "os"
+
+    "github.com/gin-gonic/gin"
 )
 
 
-type Todo struct {
-    Title string
-    Done  bool
-}
-
-
-type TodoPageData struct {
-    PageTitle string
-    Todos     []Todo
-}
-
-
 func main() {
-    tmpl := template.Must(template.ParseFiles("layout.html"))
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        data := TodoPageData{
-            PageTitle: "My TODO list",
-            Todos: []Todo{
-                {Title: "Task 1", Done: false},
-                {Title: "Task 2", Done: true},
-                {Title: "Task 3", Done: true},
-            },
-        }
-        tmpl.Execute(w, data)
+    router := gin.Default()
+    router.LoadHTMLGlob("templates/*")
+
+    router.GET("/", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "index.tmpl", gin.H{
+            "title": "Page 1",
+        })
     })
 
-    http.HandleFunc("/warren", func(w http.ResponseWriter, r *http.Request) {
-        data := TodoPageData{
-            PageTitle: "Warrens TODO list",
-            Todos: []Todo{
-                {Title: "Task 1", Done: true},
-            },
-        }
-        tmpl.Execute(w, data)
-    })
-    http.ListenAndServe(":8000", nil)
+    port := os.Getenv("PORT") # Define this on Heroku.
+    router.Run(":" + port)
 }
