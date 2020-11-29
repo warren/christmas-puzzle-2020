@@ -1,5 +1,7 @@
 package main
 
+// Don't go snooping around for answers here unless you want the puzzles spoilt.
+
 import (
     "net/http"
     "os"
@@ -18,6 +20,6 @@ func main() {
         })
     })
 
-    port := os.Getenv("PORT") # Define this on Heroku.
+    port := os.Getenv("PORT") // Define this on Heroku.
     router.Run(":" + port)
 }
