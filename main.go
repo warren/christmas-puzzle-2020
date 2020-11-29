@@ -9,7 +9,6 @@ import (
     "github.com/gin-gonic/gin"
 )
 
-
 func main() {
     router := gin.Default()
     router.LoadHTMLGlob("templates/*")
@@ -20,6 +19,28 @@ func main() {
         })
     })
 
+    router.GET("/puzzle/1", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "1.tmpl", gin.H{})
+    })
+
+    router.GET("/puzzle/2", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "2.tmpl", gin.H{})
+    })
+
+    router.GET("/puzzle/tastes", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "tastes.tmpl", gin.H{})
+    })
+
     port := os.Getenv("PORT") // Define this on Heroku.
     router.Run(":" + port)
 }
+
+/* TABLE OF CONTENTS
+   (so we remember the order that puzzles come in)
+
+   PUZZLE #, FILENAME
+   1        1
+   2        2
+   3        tastes
+   tastes   ...
+*/
