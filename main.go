@@ -1,17 +1,42 @@
 package main
 
-// Don't go snooping around for answers here unless you want the puzzles spoilt.
+// Don't go snooping around here for answers! Puzzle spoilers lie below.
 
 import (
     "net/http"
     "os"
+    "strings"
 
     "github.com/gin-gonic/gin"
 )
 
+
 func main() {
     router := gin.Default()
     router.LoadHTMLGlob("templates/*")
+
+    router.NoRoute(func(c *gin.Context) {
+        relativePath := string(c.Request.URL.String())
+        pathElems := strings.Split(relativePath, "/")
+
+        if pathElems[1] == "puzzle" {
+            if len(pathElems) >= 3 {
+                // Serve the "wrong answer" page with a hint (if applicable).
+                c.HTML(http.StatusOK, "wrong-answer.tmpl", gin.H{
+                    "wronganswer": pathElems[2],
+                    "hint": getHint(pathElems[2]),
+                })
+            } else {
+                // Serve the "wrong answer" page with the empty string.
+                c.HTML(http.StatusOK, "wrong-answer.tmpl", gin.H{
+                    "wronganswer": "",
+                })
+            }
+        }
+
+        // Serve a normal 404 page.
+        // TODO: Make a not-ugly 404 page.
+    })
 
     router.GET("/", func(c *gin.Context) {
         c.HTML(http.StatusOK, "index.tmpl", gin.H{
@@ -35,8 +60,21 @@ func main() {
     router.Run(":" + port)
 }
 
+
+// Text to add to a 404 page when the URL is equal to /puzzle/${DICT_KEY}.
+var hints = map[string]string{
+    "3": "The answer to this one isn't a number.",
+}
+func getHint(wronganswer string) string {
+    if val, ok := hints[wronganswer]; ok {
+        return val
+    }
+    return ""
+}
+
+
 /* TABLE OF CONTENTS
-   (so we remember the order that puzzles come in)
+   (so we remember which order the puzzles come in)
 
    PUZZLE #, FILENAME
    1        1
