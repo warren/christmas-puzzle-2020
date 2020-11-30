@@ -52,12 +52,16 @@ func main() {
         c.HTML(http.StatusOK, "2.tmpl", gin.H{})
     })
 
-    router.GET("/puzzle/tastes", func(c *gin.Context) {
-        c.HTML(http.StatusOK, "tastes.tmpl", gin.H{})
+    router.GET("/puzzle/taste", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "taste.tmpl", gin.H{})
     })
 
     router.GET("/puzzle/smartphone", func(c *gin.Context) {
         c.HTML(http.StatusOK, "smartphone.tmpl", gin.H{})
+    })
+
+    router.GET("/puzzle/gifts", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "gifts.tmpl", gin.H{})
     })
 
     port := os.Getenv("PORT") // Define this on Heroku.
@@ -67,14 +71,14 @@ func main() {
 
 // Text to add to a 404 page when the URL is equal to /puzzle/${DICT_KEY}.
 var hints = map[string]string{
-    "3":            "The answer to this one isn't a number.",
+    "3":            "You didn't think it would be that easy, did you?",
     "after":        "After what?",
-    "aftertaste":   "Exactly! :)",
+    "aftertaste":   "You're onto something.",
     "phone":        "What would you call a smart one of these? (You pretty much solved it)",
 }
 func getHint(wronganswer string) string {
     if val, ok := hints[wronganswer]; ok {
-        return val
+        return "** " + val + " **"
     }
     return ""
 }
@@ -86,7 +90,8 @@ func getHint(wronganswer string) string {
    PUZZLE #, FILENAME
    1            1
    2            2
-   3            tastes
-   tastes       smartphone
+   3            taste
+   taste        smartphone
    smartphone   gifts
+   gifts        ...
 */
