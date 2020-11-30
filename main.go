@@ -71,7 +71,7 @@ func main() {
 
 // Text to add to a 404 page when the URL is equal to /puzzle/${DICT_KEY}.
 var hints = map[string]string{
-    "3":            "You didn't think it would be that easy, did you?",
+    "3":            "It's not going to be that easy.",
     "after":        "After what?",
     "aftertaste":   "You're onto something.",
     "phone":        "What would you call a smart one of these? (You pretty much solved it)",
