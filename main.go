@@ -52,12 +52,16 @@ func main() {
         c.HTML(http.StatusOK, "2.tmpl", gin.H{})
     })
 
-    router.GET("/puzzle/taste", func(c *gin.Context) {
-        c.HTML(http.StatusOK, "taste.tmpl", gin.H{})
+    router.GET("/puzzle/aftertaste", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "aftertaste.tmpl", gin.H{})
     })
 
+    router.GET("/puzzle/phone", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "phone.tmpl", gin.H{})
+    })
     router.GET("/puzzle/smartphone", func(c *gin.Context) {
-        c.HTML(http.StatusOK, "smartphone.tmpl", gin.H{})
+        c.HTML(http.StatusOK, "phone.tmpl", gin.H{})
+        // TODO: Change the URL to /phone for consistency.
     })
 
     router.GET("/puzzle/gifts", func(c *gin.Context) {
@@ -72,9 +76,7 @@ func main() {
 // Text to add to a 404 page when the URL is equal to /puzzle/${DICT_KEY}.
 var hints = map[string]string{
     "3":            "It's not going to be that easy.",
-    "after":        "After what?",
-    "aftertaste":   "You're onto something.",
-    "phone":        "What would you call a smart one of these? (You pretty much solved it)",
+    "afterwhat":    "I wonder.",
 }
 func getHint(wronganswer string) string {
     if val, ok := hints[wronganswer]; ok {
