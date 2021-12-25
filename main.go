@@ -86,7 +86,7 @@ var hints = map[string]string{
     "3":            "It's not going to be that easy.",
     "after":        "That's the first half.",
     "taste":        "That's the second half.",
-    "space":        "'space' is the first hidden transition word. It would be too easy if I confirmed the rest for you though. :)"
+    "space":        "'space' is the first hidden transition word. It would be too easy if I confirmed the rest for you though. :)",
     // For the record, the transition words are: space, grace, race, rice, priced, spliced.
 }
 func getHint(wronganswer string) string {
