@@ -13,6 +13,7 @@ import (
 
 func main() {
     router := gin.Default()
+    router.Static("/assets", "./assets")
     router.LoadHTMLGlob("templates/*")
 
     router.NoRoute(func(c *gin.Context) {
@@ -75,6 +76,10 @@ func main() {
         c.HTML(http.StatusOK, "spliced.tmpl", gin.H{})
     })
 
+    router.GET("/puzzle/grainiest", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "grainiest.tmpl", gin.H{})
+    })
+
     port := os.Getenv("PORT") // Define this on Heroku.
     router.Run(":" + port)
 }
@@ -108,5 +113,6 @@ func getHint(wronganswer string) string {
    phone        gifts
    gifts        rehired
    rehired      spliced
-   spliced      ...
+   spliced      grainiest
+   grainiest    ...
 */
