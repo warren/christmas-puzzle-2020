@@ -72,12 +72,8 @@ func main() {
         c.HTML(http.StatusOK, "rehired.tmpl", gin.H{})
     })
 
-    router.GET("/puzzle/spliced", func(c *gin.Context) {
-        c.HTML(http.StatusOK, "spliced.tmpl", gin.H{})
-    })
-
-    router.GET("/puzzle/grainiest", func(c *gin.Context) {
-        c.HTML(http.StatusOK, "grainiest.tmpl", gin.H{})
+    router.GET("/puzzle/square", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "square.tmpl", gin.H{})
     })
 
     port := os.Getenv("PORT") // Define this on Heroku.
@@ -91,8 +87,6 @@ var hints = map[string]string{
     "3":            "It's not going to be that easy.",
     "after":        "That's the first half.",
     "taste":        "That's the second half.",
-    "space":        "'space' is the first hidden transition word. It would be too easy if I confirmed the rest for you though. :)",
-    // For the record, the transition words are: space, grace, race, rice, priced, spliced.
 }
 func getHint(wronganswer string) string {
     if val, ok := hints[wronganswer]; ok {
@@ -112,7 +106,5 @@ func getHint(wronganswer string) string {
    aftertaste   phone (OR: smartphone)
    phone        gifts
    gifts        rehired
-   rehired      spliced
-   spliced      grainiest
-   grainiest    ...
+   rehired      square
 */
