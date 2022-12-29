@@ -76,7 +76,7 @@ func main() {
         c.HTML(http.StatusOK, "square.tmpl", gin.H{})
     })
 
-    port := os.Getenv("PORT") // Define this on Heroku.
+    port := os.Getenv("PORT") // Define this on Heroku... still necessary?
     router.Run(":" + port)
 }
 

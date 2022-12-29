@@ -1,6 +1,6 @@
 # christmas-puzzle-2020
 
-Hmmm. Try your luck at https://christmas-puzzle-2020.herokuapp.com. ;)
+Hmmm. Try your luck at https://christmas-puzzle-2020.onrender.com. ;)
 
 ### Running locally
 1. [Download and install Go.](https://golang.org/doc/install)
