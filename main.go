@@ -76,6 +76,10 @@ func main() {
         c.HTML(http.StatusOK, "square.tmpl", gin.H{})
     })
 
+    router.GET("/puzzle/spicy", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "spicy.tmpl", gin.H{})
+    })
+
     port := os.Getenv("PORT") // Define this on Heroku... still necessary?
     router.Run(":" + port)
 }
@@ -87,6 +91,7 @@ var hints = map[string]string{
     "3":            "It's not going to be that easy.",
     "after":        "That's the first half.",
     "taste":        "That's the second half.",
+    "hot":          "You're so close. What's the flavor called?",
 }
 func getHint(wronganswer string) string {
     if val, ok := hints[wronganswer]; ok {
@@ -107,4 +112,5 @@ func getHint(wronganswer string) string {
    phone        gifts
    gifts        rehired
    rehired      square
+   square       spicy
 */
