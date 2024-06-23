@@ -92,6 +92,7 @@ var hints = map[string]string{
     "after":        "That's the first half.",
     "taste":        "That's the second half.",
     "hot":          "You're so close. What's the flavor called?",
+    "acleverscreeninyourpocket": "You're close. What is a clever screen in your pocket?",
 }
 func getHint(wronganswer string) string {
     if val, ok := hints[wronganswer]; ok {
